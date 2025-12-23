@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bank {
+public class Bank implements IBank {
 
     private final List<IAccount> accounts;
 
@@ -9,11 +9,13 @@ public class Bank {
         this.accounts = new ArrayList<>();
     }
 
+    @Override
     public void openAccount(IAccount account) {
         if (account == null) return;
         accounts.add(account);
     }
 
+    @Override
     public void closeAccount(int accountNumber) {
         IAccount found = null;
 
@@ -33,10 +35,12 @@ public class Bank {
         }
     }
 
+    @Override
     public List<IAccount> getAllAccounts() {
         return new ArrayList<>(accounts);
     }
 
+    @Override
     public List<IAccount> getAllAccountsInDebt() {
         List<IAccount> result = new ArrayList<>();
         for (IAccount account : accounts) {
@@ -47,6 +51,7 @@ public class Bank {
         return result;
     }
 
+    @Override
     public List<IAccount> getAllAccountsWithBalance(double amount) {
         List<IAccount> result = new ArrayList<>();
         for (IAccount account : accounts) {

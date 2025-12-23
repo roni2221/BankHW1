@@ -4,7 +4,6 @@ public class BasicAccount extends AbstractAccount {
 
     public BasicAccount(int accountNumber, double withdrawalLimit) {
         super(accountNumber);
-
         this.withdrawalLimit = Math.max(0.0, withdrawalLimit);
     }
 
@@ -12,9 +11,7 @@ public class BasicAccount extends AbstractAccount {
     public double withdraw(double amount) {
         if (amount <= 0) return 0.0;
 
-
         double requested = Math.min(amount, withdrawalLimit);
-
         double actual = Math.min(requested, balance);
 
         balance -= actual;
