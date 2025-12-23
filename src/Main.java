@@ -1,13 +1,32 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+public class Main {
+    public static void main(String[] args) {
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+        IAccount standard = new StandardAccount(1, -100);
+        IAccount basic = new BasicAccount(2, 100);
+        IAccount premium = new PremiumAccount(3);
+
+        Bank bank = new Bank();
+
+        bank.openAccount(standard);
+        bank.openAccount(basic);
+        bank.openAccount(premium);
+
+        System.out.println("Depositing 1000 to all accounts");
+        standard.deposit(1000);
+        basic.deposit(1000);
+        premium.deposit(1000);
+
+        System.out.println("Withdraw 3000 from Premium: " + premium.withdraw(3000));
+        System.out.println("Withdraw 3000 from Basic: " + basic.withdraw(3000));
+        System.out.println("Withdraw 3000 from Standard: " + standard.withdraw(3000));
+
+        System.out.println("Standard balance: " + standard.getCurrentBalance());
+        System.out.println("Basic balance: " + basic.getCurrentBalance());
+        System.out.println("Premium balance: " + premium.getCurrentBalance());
+
+        System.out.println("Accounts in debt:");
+        for (IAccount acc : bank.getAllAccountsInDebt()) {
+            System.out.println("Account " + acc.getAccountNumber());
+        }
     }
 }
